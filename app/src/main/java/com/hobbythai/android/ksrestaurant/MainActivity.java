@@ -1,5 +1,6 @@
 package com.hobbythai.android.ksrestaurant;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -87,6 +88,11 @@ public class MainActivity extends AppCompatActivity {
                 //password true
                 Toast.makeText(this, "ยินดีต้อนรับ " + resultStrings[3], Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(MainActivity.this, ServiceActivity.class);
+                intent.putExtra("Officer", resultStrings[3]);
+                startActivity(intent);
+                finish();
+
             } else {
                 //password false
                 MyAlert myAlert = new MyAlert();
@@ -121,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
 
-                //syn server
+                //syn server get data from server
                 OkHttpClient okHttpClient = new OkHttpClient();
                 Request.Builder builder = new Request.Builder();
                 Request request = builder.url("http://swiftcodingthai.com/9Apr/php_get_user_ks.php").build();
